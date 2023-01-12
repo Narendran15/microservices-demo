@@ -22,7 +22,8 @@ phases:
   build:
     commands: 
       - echo Build started on `date`
-      - echo Building the Docker image...
+      - echo Building the Docker image... 
+      - docker images
       - docker build -t $AD_REPO_NAME:$AD_IMAGE_TAG src/adservice/
       - docker tag $AD_REPO_NAME:$AD_IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AD_REPO_NAME:$AD_IMAGE_TAG
       - docker images
