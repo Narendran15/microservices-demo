@@ -27,8 +27,7 @@ phases:
       - docker build -t $AD_REPO_NAME:$AD_IMAGE_TAG src/adservice/
       - docker tag $AD_REPO_NAME:$AD_IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AD_REPO_NAME:$AD_IMAGE_TAG
       - docker images
-      - docker build -t $CART_REPO_NAME:$CART_IMAGE_TAG src/cartservice/src/
-      - docker tag $CART_REPO_NAME:$CART_SERVICE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$CART_REPO_NAME:$CART_IMAGE_TAG
+      - docker build -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$CART_REPO_NAME:$CART_IMAGE_TAG src/cartservice/src/
 
   post_build:
     commands: 
