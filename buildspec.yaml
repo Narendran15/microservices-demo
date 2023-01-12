@@ -6,7 +6,6 @@ phases:
       - echo Installing app dependencies...
       - curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
       - chmod +x ./kubectl
-      - mv ./kubectl /usr/local/bin/kubectl
       - mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
       - echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
       - source ~/.bashrc
@@ -34,4 +33,4 @@ phases:
       - echo Pushing the Docker image...
       - docker images
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
-      - kubectl apply -f /microservices-demo/kubernetes-manifests/adservice.yaml
+      - kubectl apply -f kubernetes-manifests/adservice.yaml
