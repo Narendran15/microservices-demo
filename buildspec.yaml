@@ -35,5 +35,6 @@ phases:
       - echo Entered the post_build phase...
       - echo Pushing the Docker image...
       - docker images
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AD_REPO_NAME:$AD_IMAGE_TAG
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AD_REPO_NAME:$AD_IMAGE_TAG 
+      - docker images 
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$CART_REPO_NAME:$CART_IMAGE_TAG
