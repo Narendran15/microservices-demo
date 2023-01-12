@@ -23,8 +23,10 @@ phases:
     commands: 
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG src/adservice/
-      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+      - docker build -t $AD_REPO_NAME:$AD_IMAGE_TAG src/adservice/
+      - docker tag $AD_REPO_NAME:$AD_IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AD_REPO_NAME:$AD_IMAGE_TAG
+      - docker build -t $CART_REPO_NAME:$CART_IMAGE_TAG src/cartservice/src/
+      - docker tag $CART_REPO_NAME:$CART_SERVICE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$CART_REPO_NAME:$CART_IMAGE_TAG
 
   post_build:
     commands: 
@@ -32,5 +34,5 @@ phases:
       - echo Entered the post_build phase...
       - echo Pushing the Docker image...
       - docker images
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
-      - kubectl apply -f kubernetes-manifests/adservice.yaml
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AD_REPO_NAME:$AD_IMAGE_TAG
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$CART_REPO_NAME:$CART_IMAGE_TAG
