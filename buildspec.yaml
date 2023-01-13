@@ -13,6 +13,7 @@ phases:
 
   pre_build: 
     commands: 
+      - export KUBECONFIG=~/.kube/config
       - echo Entered the pre_build phase...
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.ap-south-1.amazonaws.com
