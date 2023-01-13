@@ -39,6 +39,13 @@ phases:
       - docker images
       - docker build -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$LOAD_REPO_NAME:$IMAGE_TAG src/loadgenerator/
       - docker images
+      - docker build -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$PAYMENT_REPO_NAME:$IMAGE_TAG src/paymentservice/
+      - docker images
+      - docker build -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$PRODUCTCATALOG_REPO_NAME:$IMAGE_TAG src/productcatalogservice/
+      - docker images
+      - docker build -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$RECOMMENDATION_REPO_NAME:$IMAGE_TAG src/recommendationservice/
+      - docker images
+      - docker build -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$SHIPPING_REPO_NAME:$IMAGE_TAG src/shippingservice/
 
   post_build:
     commands: 
@@ -59,3 +66,11 @@ phases:
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$FRONTEND_REPO_NAME:$IMAGE_TAG
       - docker images
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$LOAD_REPO_NAME:$IMAGE_TAG
+      - docker images
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$PAYMENT_REPO_NAME:$IMAGE_TAG
+      - docker images
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$PRODUCTCATALOG_REPO_NAME:$IMAGE_TAG
+      - docker images
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$RECOMMENDATION_REPO_NAME:$IMAGE_TAG
+      - docker images
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$SHIPPING_REPO_NAME:$IMAGE_TAG
