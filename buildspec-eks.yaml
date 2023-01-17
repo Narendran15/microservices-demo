@@ -31,7 +31,6 @@ phases:
 
   post_build:
     commands:
-      - echo Build completed on `date`
       - echo Entered the post_build phase...
       - echo Pushing the Docker image...
       - docker images
