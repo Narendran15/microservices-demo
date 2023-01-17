@@ -1,0 +1,40 @@
+version: 0.2
+
+phases: 
+  install: 
+    commands: 
+      - echo Installing app dependencies...
+      - curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.15.10/2020-02-22/bin/linux/amd64/kubectl
+      - chmod +x ./kubectl
+      - mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
+      - echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
+      - source ~/.bashrc
+      - echo 'Check kubectl version' 
+      - kubectl version --short --client
+
+  pre_build:
+    commands:
+      - export KUBECONFIG=~/.kube/config
+      - echo Entered the pre_build phase...
+      - echo Logging in to Amazon EKS...
+      - aws eksaws eks update-kubeconfig --region $AWS_DEFAULT_REGION  --name $AWS_CLUSTER_NAME
+      - echo Logging in to Amazon ECR...
+      - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/o5z7i6s7
+
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - docker build -t $IMAGE_REPO_NAME src/adservice/
+      - docker images
+      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG public.ecr.aws/o5z7i6s7/$IMAGE_REPO_NAME:$IMAGE_TAG
+
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Entered the post_build phase...
+      - echo Pushing the Docker image...
+      - docker images
+      - docker push public.ecr.aws/o5z7i6s7/$IMAGE_REPO_NAME:$IMAGE_TAG
+      - kubectl get pods 
+      - kubectl apply -f kubernetes-manifests/adservice.yaml
