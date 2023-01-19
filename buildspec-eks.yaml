@@ -37,4 +37,5 @@ phases:
       - docker images
       - docker push public.ecr.aws/o5z7i6s7/$IMAGE_REPO_NAME:$IMAGE_TAG 
       - docker images
+      - kubectl get nodes
       - kubectl apply -f kubernetes-manifests/adservice.yaml
