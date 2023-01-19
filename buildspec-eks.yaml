@@ -16,8 +16,6 @@ phases:
     commands:
       - export KUBECONFIG=~/.kube/config
       - echo Entered the pre_build phase...
-      - echo Logging in to Amazon EKS...
-      - aws eks update-kubeconfig --region $AWS_DEFAULT_REGION  --name $AWS_CLUSTER_NAME
       - echo Logging in to Amazon ECR...
       - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/o5z7i6s7
 
@@ -43,5 +41,9 @@ phases:
       - export AWS_SECRET_ACCESS_KEY="$(echo ${CREDENTIALS} | jq -r '.Credentials.SecretAccessKey')"
       - export AWS_SESSION_TOKEN="$(echo ${CREDENTIALS} | jq -r '.Credentials.SessionToken')"
       - export AWS_EXPIRATION=$(echo ${CREDENTIALS} | jq -r '.Credentials.Expiration')
+      # Setup kubectl with our EKS Cluster              
+      - echo "Update Kube Config" 
+      - echo Logging in to Amazon EKS...
+      - aws eks update-kubeconfig --region $AWS_DEFAULT_REGION  --name $AWS_CLUSTER_NAME
       - docker images
       - kubectl apply -f kubernetes-manifests/adservice.yaml
