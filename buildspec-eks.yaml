@@ -11,14 +11,14 @@ phases:
       - source ~/.bashrc
       - echo 'Check kubectl version' 
       - kubectl version --short --client
+      # Verify AWS CLI Version        
+      - echo "Verify AWS CLI Version..."
+      - aws --version
 
   pre_build:
     commands:
       - export KUBECONFIG=~/.kube/config
       - echo Entered the pre_build phase...
-      # Verify AWS CLI Version        
-      - echo "Verify AWS CLI Version..."
-      - aws --version
       - echo Logging in to Amazon ECR...
       - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/o5z7i6s7
 
