@@ -54,4 +54,3 @@ phases:
       - aws eks update-kubeconfig --region $AWS_DEFAULT_REGION  --name $AWS_CLUSTER_NAME
       - docker images
       - kubectl apply -f kubernetes-manifests/adservice.yaml
-      - kubectl rollout restart -f kubernetes-manifests/adservice.yaml
