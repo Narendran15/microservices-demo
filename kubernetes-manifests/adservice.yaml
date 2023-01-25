@@ -41,7 +41,7 @@ spec:
               - all
           privileged: false
           readOnlyRootFilesystem: true
-        image: public.ecr.aws/o5z7i6s7/hipster-adservice:v1
+        image: ADSERVICE_IMAGE
         ports:
         - containerPort: 9555
         env:
