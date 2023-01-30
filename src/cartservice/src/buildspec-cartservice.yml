@@ -54,3 +54,5 @@ phases:
       - aws eks update-kubeconfig --region $AWS_DEFAULT_REGION  --name $AWS_CLUSTER_NAME
       - docker images
       - kubectl apply -f kubernetes-manifests/cartservice.yaml 
+      - kubectl get svc 
+      - kubectl apply -f kubernetes-manifests/redis.yaml
