@@ -40,7 +40,6 @@ phases:
       - echo Build started on `date`
       - echo Entered the post_build phase...
       - echo Pushing the Docker image...
-      - docker images
       - docker push public.ecr.aws/o5z7i6s7/$IMAGE_REPO_NAME:$IMAGE_TAG 
       # Extracting AWS Credential Information using STS Assume Role for kubectl
       - echo "Setting Environment Variables related to AWS CLI for Kube Config Setup"          
