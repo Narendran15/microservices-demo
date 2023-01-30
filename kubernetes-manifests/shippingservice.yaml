@@ -40,7 +40,7 @@ spec:
               - all
           privileged: false
           readOnlyRootFilesystem: true
-        image: shippingservice
+        image: SHIPPINGSERVICE_IMAGE
         ports:
         - containerPort: 50051
         env:

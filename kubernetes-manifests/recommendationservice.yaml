@@ -41,7 +41,7 @@ spec:
               - all
           privileged: false
           readOnlyRootFilesystem: true
-        image: recommendationservice
+        image: RECOMMENDATIONSERVICE_IMAGE
         ports:
         - containerPort: 8080
         readinessProbe:

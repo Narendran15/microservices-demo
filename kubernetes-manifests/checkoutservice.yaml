@@ -40,7 +40,7 @@ spec:
                 - all
             privileged: false
             readOnlyRootFilesystem: true
-          image: checkoutservice
+          image: CHECKOUTSERVICE_IMAGE
           ports:
           - containerPort: 5050
           readinessProbe:
